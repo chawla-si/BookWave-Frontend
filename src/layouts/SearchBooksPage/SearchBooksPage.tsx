@@ -25,6 +25,12 @@ export const SearchBooksPage = () => {
 
             let url: string = `${baseUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
 
+            if (searchUrl === '') {
+                url = `${baseUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
+            } else {
+                url = baseUrl + searchUrl;
+            }
+
             const response = await fetch(url);
 
             if (!response.ok) {
