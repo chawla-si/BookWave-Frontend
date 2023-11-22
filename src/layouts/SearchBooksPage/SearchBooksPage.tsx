@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import BookModel from '../../models/BookModel';
 import { SearchBook } from './components/SearchBook';
 import { SpinnerLoading } from '../Utils/SpinnerLoading';
+import { Pagination } from '../Utils/Pagination';
 import { directive } from '@babel/types';
 
 
@@ -22,7 +23,7 @@ export const SearchBooksPage = () => {
         const fetchBooks = async () => {
             const baseUrl: string = "http://localhost:8080/api/books";
 
-            let url: string = `${baseUrl}?page=0&size=5`;
+            let url: string = `${baseUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
 
             const response = await fetch(url);
 
@@ -162,14 +163,18 @@ export const SearchBooksPage = () => {
                     {totalAmountOfBooks > 0 ?
                         <>
                             <div className='mt-3'>
-                                <h5>Number of results: (22)</h5>
+                                <h5>Number of results: ({totalAmountOfBooks})</h5>
                             </div>
                             <p>
-                                1 to 5 of 22 items:
+                                {indexOfFirstBook +1} to {lastItem} of {totalAmountOfBooks} items:
                             </p>
                             {books.map(book => (
                                 <SearchBook book={book} key={book.id} />
                             ))}
+
+                            {totalPages > 1 &&
+                                <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
+                            }
                         </>
                         :
                         <div className='m-5'>
@@ -180,7 +185,6 @@ export const SearchBooksPage = () => {
                                 href='#'>Library Services</a>
                         </div>
                     }
-                    
                 </div>
             </div>
         </div>
