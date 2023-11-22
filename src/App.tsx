@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Navbar } from './layouts/NavbarAndFooter/Navbar';
 import { Footer } from './layouts/NavbarAndFooter/Footer';
 import { HomePage } from './layouts/Homepage/HomePage';
@@ -10,7 +10,10 @@ export const App = () => {
     <div>
       <Navbar />
       <Switch>
-        <Route path='/'>
+        <Route path='/' exact>
+          <Redirect to='/home' />
+        </Route>
+        <Route path='/home'>
           <HomePage />
         </Route>
         <Route path='/search'>
