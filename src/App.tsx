@@ -4,6 +4,7 @@ import { Navbar } from './layouts/NavbarAndFooter/Navbar';
 import { Footer } from './layouts/NavbarAndFooter/Footer';
 import { HomePage } from './layouts/Homepage/HomePage';
 import { SearchBooksPage } from './layouts/SearchBooksPage/SearchBooksPage';
+import { BookCheckoutPage } from './layouts/BookCheckoutPage/BookCheckoutPage';
 
 export const App = () => {
   return (
@@ -19,6 +20,9 @@ export const App = () => {
         </Route>
         <Route path='/search'>
           <SearchBooksPage />
+        </Route>
+        <Route path='/checkout/:bookId'>
+          <BookCheckoutPage />
         </Route>
       </Switch>
       </div>
