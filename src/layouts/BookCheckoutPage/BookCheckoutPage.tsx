@@ -77,12 +77,12 @@ export const BookCheckoutPage = () => {
                             <h2>{book?.title}</h2>
                             <h5 className='test-primary'>{book?.author}</h5>
                             <p className='lead'>{book?.description}</p>
-                            <StarsReview rating={4} size={32}/>
+                            <StarsReview rating={2.5} size={32}/>
                         </div>
                     </div>
                 </div>
                 <hr/>
-            </div>
+            </div> 
             <div className="container d-lg-none mt-5">
                 <div className="d-flex justify-content-center align-items-center">
                 {book?.img ? 
@@ -97,6 +97,7 @@ export const BookCheckoutPage = () => {
                         <h2>{book?.title}</h2>
                         <h5 className="text-primary">{book?.author}</h5>
                         <p className="lead">{book?.description}</p>
+                        <StarsReview rating={2.5} size={32}/>
                     </div>
                 </div>
                 <hr/>
