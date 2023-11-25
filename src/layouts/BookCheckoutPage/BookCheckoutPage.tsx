@@ -40,7 +40,6 @@ export const BookCheckoutPage = () => {
 
             };
 
-
             setBook(LoadedBook);
             setIsLoading(false);
         };
@@ -52,7 +51,7 @@ export const BookCheckoutPage = () => {
 
     useEffect(() => {
         const fetchBookReviews = async () => {
-            const reviewUrl: string = `http://localhost:8080/api/reviews/search/findByBookId?bookId=${bookId}`;
+            const reviewUrl: string = `http://localhost:8080/api/reviews/search/findBookById?bookId=${bookId}`;
 
             const responseReviews = await fetch(reviewUrl);
 
