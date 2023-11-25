@@ -53,3 +53,5 @@ export const StarsReview: React.FC<{ rating: number, size: number }> = (props) =
         </div>
     );
 }
+
+export default StarsReview;
