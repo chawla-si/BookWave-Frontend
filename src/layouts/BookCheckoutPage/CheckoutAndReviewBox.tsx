@@ -3,7 +3,8 @@ import BookModel from "../../models/BookModel";
 
 // import { LeaveAReview } from "../Utils/LeaveAReview";
 
-export const CheckoutAndReviewBox: React.FC<{ book: BookModel | undefined, mobile: boolean, 
+export const CheckoutAndReviewBox: React.FC<{
+    book: BookModel | undefined, mobile: boolean,
     // currentLoansCount: number, isAuthenticated: any, isCheckedOut: boolean, 
     // checkoutBook: any, isReviewLeft: boolean, submitReview: any 
 }> = (props) => {
@@ -36,10 +37,10 @@ export const CheckoutAndReviewBox: React.FC<{ book: BookModel | undefined, mobil
         //     )
         // }
         return (
-        <div>
-            <hr/>
-            <p>Sign in to be able to leave a review.</p>
-        </div>
+            <div>
+                <hr />
+                <p>Sign in to be able to leave a review.</p>
+            </div>
         )
     }
 
@@ -69,7 +70,6 @@ export const CheckoutAndReviewBox: React.FC<{ book: BookModel | undefined, mobil
                         <p className='col-6 lead'>
                             <b>{props.book?.copiesAvailable} </b>
                             available
-
                         </p>
                     </div>
                 </div>
@@ -80,24 +80,6 @@ export const CheckoutAndReviewBox: React.FC<{ book: BookModel | undefined, mobil
                 </p>
                 {reviewRender()}
             </div>
-
-
-                        </p>
-
-                    </div>
-                </div>
-                <Link to ='/#' className='btn btn-success btn-lg'> Sign In </Link>
-                <hr/>
-                <p className='mt-3'>
-                    This number can change until placing order has been complete.
-                </p>
-                <p>
-                    Sign in to be able to leave a review.
-                </p>
-
-            </div>
-
-
         </div>
     );
 }
