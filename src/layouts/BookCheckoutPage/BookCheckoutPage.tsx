@@ -5,7 +5,8 @@ import ReviewModel from "../../models/ReviewModel";
 import { LatestReviews } from "./LastestReviews";
 import {CheckoutAndReviewBox} from "./CheckoutAndReviewBox";
 import StarReview from "../Utils/StarReview";
-
+import { StarsReview } from "../Utils/StarsReview";
+import { CheckoutAndReviewBox } from "./CheckoutAndReviewBox";
 
 export const BookCheckoutPage = () => {
 
