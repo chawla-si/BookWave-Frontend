@@ -81,6 +81,6 @@ export const CheckoutAndReviewBox: React.FC<{
                 </p>
                 {reviewRender()}
             </div>
-        </div>
+         </div>
     );
 }
