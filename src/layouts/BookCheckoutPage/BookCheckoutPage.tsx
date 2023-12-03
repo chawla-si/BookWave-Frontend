@@ -147,7 +147,9 @@ export const BookCheckoutPage = () => {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${authState.accessToken?.accessToken}`,
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers' : "Content-Type"
                     }
                 };
                 const bookCheckedOut = await fetch(url, requestOptions);
