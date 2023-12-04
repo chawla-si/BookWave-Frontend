@@ -4,9 +4,9 @@ import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import ReviewModel from "../../models/ReviewModel";
 import { LatestReviews } from "./LastestReviews";
 import {CheckoutAndReviewBox} from "./CheckoutAndReviewBox";
-import StarReview from "../Utils/StarReview";
 import { StarsReview } from "../Utils/StarsReview";
 import { useOktaAuth } from "@okta/okta-react";
+import ReviewRequestModel from "../../models/ReviewRequestModel";
 
 export const BookCheckoutPage = () => {
 
@@ -104,7 +104,7 @@ export const BookCheckoutPage = () => {
                 const round = (Math.round((weightedStarReviews / loadedReviews.length) * 2) / 2).toFixed(1);
                 setTotalStars(Number(round));
             }
-
+            console.log(loadedReviews)
             setReviews(loadedReviews);
             setIsLoadingReview(false);
         };
@@ -113,7 +113,7 @@ export const BookCheckoutPage = () => {
             setIsLoadingReview(false);
             setHttpError(error.message);
         })
-    }, []);
+    }, [isReviewLeft]);
 
     useEffect(() => {
         const fetchUserReviewBook = async () => {
@@ -226,6 +226,28 @@ export const BookCheckoutPage = () => {
         }
         setIsCheckedOut(true);
     }
+    async function submitReview(starInput: number, reviewDescription: string) {
+        let bookId: number = 0;
+        if (book?.id) {
+            bookId = book.id;
+        }
+
+        const reviewRequestModel = new ReviewRequestModel(starInput, bookId, reviewDescription);
+        const url = `http://localhost:8080/api/reviews/secure`;
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reviewRequestModel)
+        };
+        const returnResponse = await fetch(url, requestOptions);
+        if (!returnResponse.ok) {
+            throw new Error('Something went wrong!');
+        }
+        setIsReviewLeft(true);
+    }
 
     return (
         <div>
@@ -244,12 +266,12 @@ export const BookCheckoutPage = () => {
                             <h2>{book?.title}</h2>
                             <h5 className='text-primary'>{book?.author}</h5>
                             <p className='lead'>{book?.description}</p>
-                            <StarReview rating={totalStars} size={32} />
+                            <StarsReview rating={totalStars} size={32} />
                         </div>
                     </div>
                     <CheckoutAndReviewBox book={book} mobile={false} currentLoansCount={currentLoansCount}
                     isAuthenticated={authState?.isAuthenticated} isCheckedOut={isCheckedOut}
-                    checkoutBook={checkoutBook}/>
+                    checkoutBook={checkoutBook} isReviewLeft={isReviewLeft} submitReview={submitReview}/>
                 </div>
                 <hr />
                 <LatestReviews reviews={reviews} bookId={book?.id} mobile={false} />
@@ -268,12 +290,12 @@ export const BookCheckoutPage = () => {
                         <h2>{book?.title}</h2>
                         <h5 className='text-primary'>{book?.author}</h5>
                         <p className='lead'>{book?.description}</p>
-                        <StarReview rating={totalStars} size={32} />
+                        <StarsReview rating={totalStars} size={32} />
                     </div>
                 </div>
                 <CheckoutAndReviewBox book={book} mobile={true} currentLoansCount={currentLoansCount}
                 isAuthenticated={authState?.isAuthenticated} isCheckedOut={isCheckedOut}
-                checkoutBook={checkoutBook}/>
+                checkoutBook={checkoutBook} isReviewLeft={isReviewLeft} submitReview={submitReview}/>
                 <hr />
                 <LatestReviews reviews={reviews} bookId={book?.id} mobile={true} />
             </div>
