@@ -24,7 +24,7 @@ export const Heros = () => {
                             to='search'>Explore top books</Link>
 
                             :
-                            <Link className="btn main-color btn-lg text-" to="/login">Sign Up</Link>
+                            <Link className="btn main-color btn-lg text-white" to="/login">Sign Up</Link>
                         }  </div>
                     </div> 
                 </div>
