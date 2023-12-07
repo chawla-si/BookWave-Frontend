@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# BookWave: A Library Management System
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -31,16 +31,37 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Authentication:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+For authentication we have used developer 
+Third party authentication provider:   
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Okta           
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Adding users & defining their user roles is done by Okta
+- Used OIDC of Okta: Token based OAuth for Single Sign-On(SSO) through API endpoints
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Pagination
+ 
+ - Pagination is useful for handling large amount of data
+ - Way for users to navigate over large amount of data
+ - It is implemented on Search books page and on admin section on Change Quantity page
+ - Pagination is implemented on both frontend and backend
+ - For example,
+    (By default springboot gets default of 20 data objects)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    Get first page, with page size of 10
+    call API like: http://localhost:8080/api/books?page=0&size=10
+    
+    Get second page, with page size of 10
+    call API like: http://localhost:8080/api/books?page=1&size=10
+- Spring Response gives us metadata :
+    <<array of books>>
+    "page":
+    {
+        "size": 10,
+        "totalElements": 200,
+        "totolPages": 20,
+        "number": 0
+    }
